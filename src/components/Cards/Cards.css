@@ -13,9 +13,8 @@
 
 .card:hover {
   box-shadow: 10px 10px 30px #8f8f8f, 10px 10px 30px #ebebeb;
-  padding: 2em;
-  margin: 0;
   transition-duration: 0.4s;
+  scale: 1.05;
 }
 
 .data-card {
@@ -38,25 +37,31 @@
 
 .title {
   margin: 0;
-  padding: 0 20px 20px 20px;
+  padding: 0 20px 10px 20px;
   max-width: 240px;
 }
 
 .data-of-release {
   padding: 0 20px 0 20px;
+  color: #827e7e;
 }
 
 .category {
   margin: 0;
   list-style: none;
-  margin: 20px 0 0;
+  margin: 10px 0 0;
   padding: 0;
   display: flex;
 }
 
 .category > li {
+  padding-left: 5px;
+}
+
+.category > li:first-child {
   padding-left: 20px;
 }
+
 .category > li > button {
   cursor: pointer;
   background-color: #fff;
@@ -77,6 +82,7 @@
 .intro {
   max-width: 240px;
   padding-left: 20px;
+  margin: 10px 0 0;
 }
 
 .more-text {

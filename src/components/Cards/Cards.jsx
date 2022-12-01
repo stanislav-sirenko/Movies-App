@@ -13,19 +13,19 @@ export default class Cards extends Component {
   _imgPath = 'https://image.tmdb.org/t/p/w500'
 
   mainText(text) {
-    return text.split(' ').slice(0, 59).join(' ')
+    return text.split(' ').slice(0, 54).join(' ')
   }
 
   moreText(text) {
     let words = text.split(' ')
-    if (words.length > 60) {
-      return words.slice(59, words.length).join(' ')
+    if (words.length > 55) {
+      return words.slice(54, words.length).join(' ')
     }
   }
 
   hidenDots(text) {
     let word = text.split(' ')
-    return word.length > 60 ? '...' : ' '
+    return word.length > 55 ? '...' : ' '
   }
 
   readMore = () => {
