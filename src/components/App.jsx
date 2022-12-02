@@ -10,8 +10,8 @@ import './App.css'
 export default class App extends Component {
   state = {
     request: [],
-    isVisibleText: false,
-    isVisibleDots: true,
+    // isVisibleText: false,
+    // isVisibleDots: true,
   }
 
   async componentDidMount() {
@@ -21,43 +21,23 @@ export default class App extends Component {
     })
   }
 
-  mainText(text) {
-    return text.split(' ').slice(0, 54).join(' ')
-  }
-
-  moreText(text) {
-    console.log(text)
-    let words = text.split(' ')
-    if (words.length > 55) {
-      return words.slice(54, words.length).join(' ')
-    }
-  }
-
-  hidenDots(text) {
-    let word = text.split(' ')
-    return word.length > 55 ? '...' : ' '
-  }
-
-  readMore = () => {
-    this.setState(({ isVisibleText, isVisibleDots }) => {
-      return { isVisibleText: !isVisibleText, isVisibleDots: !isVisibleDots }
-    })
-  }
+  // readMore = () => {
+  //   this.setState(({ isVisibleText, isVisibleDots }) => {
+  //     return { isVisibleText: !isVisibleText, isVisibleDots: !isVisibleDots }
+  //   })
+  // }
 
   render() {
-    const { request, isVisibleText, isVisibleDots } = this.state
+    const { request } = this.state
 
     return (
       <div className="movies-app">
         <SearchForm />
         <Movies
           request={request}
-          isVisibleText={isVisibleText}
-          isVisibleDots={isVisibleDots}
-          mainText={this.mainText}
-          moreText={this.moreText}
-          hidenDots={this.hidenDots}
-          readMore={this.readMore}
+          // isVisibleText={isVisibleText}
+          // isVisibleDots={isVisibleDots}
+          // readMore={this.readMore}
         />
         <Pages />
       </div>

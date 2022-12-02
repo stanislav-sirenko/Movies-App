@@ -7,40 +7,46 @@ import './Card.css'
 export default class Card extends Component {
   _imgPath = 'https://image.tmdb.org/t/p/w500'
 
-  // mainText(text) {
-  //   return text.split(' ').slice(0, 54).join(' ')
-  // }
+  state = {
+    isVisibleText: false,
+    isVisibleDots: true,
+  }
 
-  // moreText(text) {
-  //   let words = text.split(' ')
-  //   if (words.length > 55) {
-  //     return words.slice(54, words.length).join(' ')
-  //   }
-  // }
+  mainText(text) {
+    return text.split(' ').slice(0, 54).join(' ')
+  }
 
-  // hidenDots(text) {
-  //   let word = text.split(' ')
-  //   return word.length > 55 ? '...' : ' '
-  // }
+  moreText(text) {
+    let words = text.split(' ')
+    if (words.length > 55) {
+      return words.slice(54, words.length).join(' ')
+    }
+  }
 
-  // readMore = () => {
-  //   this.setState(({ isVisibleText, isVisibleDots }) => {
-  //     return { isVisibleText: !isVisibleText, isVisibleDots: !isVisibleDots }
-  //   })
-  // }
+  hidenDots(text) {
+    let word = text.split(' ')
+    return word.length > 55 ? '...' : ' '
+  }
+
+  readMore = () => {
+    this.setState(({ isVisibleText, isVisibleDots }) => {
+      return { isVisibleText: !isVisibleText, isVisibleDots: !isVisibleDots }
+    })
+  }
 
   render() {
-    const { request, isVisibleText, isVisibleDots, mainText, moreText, hidenDots, readMore } = this.props
+    const { poster_path, title, release_date, overview } = this.props
+    const { isVisibleText, isVisibleDots } = this.state
     let classEdit = !isVisibleText ? 'more-text' : ''
     let dots = !isVisibleDots ? 'dots' : ''
 
     return (
       <section className="card-condainer">
         <div className="card">
-          <img className="poster" src={`${this._imgPath}${request.poster_path}`} alt="poster" />
+          <img className="poster" src={`${this._imgPath}${poster_path}`} alt="poster" />
           <div className="data-card">
-            <h2 className="title">{request.title}</h2>
-            <div className="data-of-release">{format(new Date(request.release_date), 'PP', { locale: ru })}</div>
+            <h2 className="title">{title}</h2>
+            <div className="data-of-release">{format(new Date(release_date), 'PP', { locale: ru })}</div>
             <ul className="category">
               <li>
                 <button aria-label="category">экшн</button>
@@ -50,10 +56,10 @@ export default class Card extends Component {
               </li>
             </ul>
 
-            <p className="intro" onClick={() => readMore()}>
-              {mainText()}
-              <span className={dots}>{hidenDots()}</span>
-              <span className={classEdit}> {moreText()}</span>
+            <p className="intro" onClick={this.readMore}>
+              {this.mainText(overview)}
+              <span className={dots}>{this.hidenDots(overview)}</span>
+              <span className={classEdit}> {this.moreText(overview)}</span>
             </p>
           </div>
         </div>
