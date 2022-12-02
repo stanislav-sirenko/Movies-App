@@ -3,9 +3,3 @@
   flex-direction: column;
   align-items: center;
 }
-
-.card-condainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
