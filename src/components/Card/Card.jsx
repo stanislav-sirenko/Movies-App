@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { format } from 'date-fns'
 import { ru } from 'date-fns/locale'
 
+import Image from './no-poster.webp'
+
 import './Card.css'
 
 export default class Card extends Component {
@@ -34,19 +36,32 @@ export default class Card extends Component {
     })
   }
 
+  posterPath = (poster_path, availabilityPoster) => {
+    return poster_path === null ? Image : availabilityPoster
+  }
+
+  releaseData = (release_date) => {
+    if (release_date) {
+      return format(new Date(release_date), 'PP', { locale: ru })
+    } else {
+      return 'Release date unknown'
+    }
+  }
+
   render() {
     const { poster_path, title, release_date, overview } = this.props
     const { isVisibleText, isVisibleDots } = this.state
     let classEdit = !isVisibleText ? 'more-text' : ''
     let dots = !isVisibleDots ? 'dots' : ''
+    let availabilityPoster = `${this._imgPath}${poster_path}`
 
     return (
       <section className="card-condainer">
         <div className="card">
-          <img className="poster" src={`${this._imgPath}${poster_path}`} alt="poster" />
+          <img className="poster" src={this.posterPath(poster_path, availabilityPoster)} alt="poster" />
           <div className="data-card">
             <h2 className="title">{title}</h2>
-            <div className="data-of-release">{format(new Date(release_date), 'PP', { locale: ru })}</div>
+            <div className="data-of-release">{this.releaseData(release_date)}</div>
             <ul className="category">
               <li>
                 <button aria-label="category">экшн</button>

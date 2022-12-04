@@ -3,27 +3,38 @@ import React, { Component } from 'react'
 import './SearchForm.css'
 export default class SearchForm extends Component {
   state = {
-    label: '',
+    value: '',
   }
 
   onLabelChange = (event) => {
     if (event.target.value.charAt(0) === ' ') {
       this.setState({
-        label: '',
+        value: '',
       })
     } else {
       this.setState({
-        label: event.target.value,
+        value: event.target.value,
       })
     }
   }
+
+  onSubmit = (event) => {
+    const { searchMovie } = this.props
+    const { value } = this.state
+    event.preventDefault()
+    searchMovie(value)
+    this.setState({
+      value: '',
+    })
+  }
+
   render() {
-    const { label } = this.state
+    const { value } = this.state
     return (
       <form className="search-form" onSubmit={this.onSubmit}>
         <div className="search-button">
           <input type="submit" value="Поиск" />
-          <input type="submit" value="Реитинг" />
+          <input type="submit" value="Рейтинг" />
         </div>
         <label className="search-label">
           <input
@@ -31,7 +42,7 @@ export default class SearchForm extends Component {
             className="search-input"
             placeholder="Введите текст для поиска..."
             onChange={this.onLabelChange}
-            value={label}
+            value={value}
             autoFocus
           />
         </label>
