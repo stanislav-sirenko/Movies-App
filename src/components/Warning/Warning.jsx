@@ -1,19 +1,4 @@
 import React from 'react'
-import { Alert, Space } from 'antd'
-const Warning = () => (
-  <Space
-    direction="vertical"
-    style={{
-      width: '100%',
-    }}
-  >
-    <Alert
-      message="Внимание!"
-      description="Фильмов по указанному поиску не нашлось."
-      type="warning"
-      showIcon
-      closable
-    />
-  </Space>
-)
+import { Alert } from 'antd'
+const Warning = () => <Alert message="По Вашему запросу ничего не найдено" type="info" showIcon />
 export default Warning

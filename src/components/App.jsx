@@ -32,14 +32,14 @@ export default class App extends Component {
   }
 
   render() {
-    const { request } = this.state
+    const { request, value } = this.state
     console.log(request.length)
 
     return (
       <div className="movies-app">
         <SearchForm searchMovie={this.searchMovie} />
         <React.Suspense fallback={<Preloader />}>
-          {request.length ? <Movies request={request} /> : <Warning />}
+          {request.length ? <Movies request={request} /> : <Warning value={value} />}
         </React.Suspense>
         <Pages />
       </div>
