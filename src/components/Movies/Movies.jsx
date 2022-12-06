@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+import Warning from '../Warning/Warning'
 import Card from '../Card/Card'
 
 import './Movies.css'
@@ -7,12 +8,17 @@ import './Movies.css'
 export default class Movies extends Component {
   render() {
     const { request } = this.props
+    console.log(request)
 
-    const films = request.map((film) => {
-      const { id, ...allProps } = film
-      return <Card key={id} {...allProps} />
-    })
+    if (request.length) {
+      const films = request.map((film) => {
+        const { id, ...allProps } = film
+        return <Card key={id} {...allProps} />
+      })
 
-    return <section className="card-condainer">{films}</section>
+      return <section className="card-condainer">{films}</section>
+    } else {
+      return <Warning />
+    }
   }
 }

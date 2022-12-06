@@ -48,9 +48,23 @@ export default class Card extends Component {
     }
   }
 
+  reitingColor = (vote_average) => {
+    if (vote_average <= 3) {
+      return { borderColor: '#E90000' }
+    }
+    if (vote_average <= 5) {
+      return { borderColor: '#E97E00' }
+    }
+    if (vote_average <= 7) {
+      return { borderColor: '#E9D100' }
+    }
+    return { borderColor: '#66E900' }
+  }
+
   render() {
-    const { poster_path, title, release_date, overview } = this.props
+    const { poster_path, title, release_date, overview, vote_average } = this.props
     const { isVisibleText, isVisibleDots } = this.state
+
     let classEdit = !isVisibleText ? 'more-text' : ''
     let dots = !isVisibleDots ? 'dots' : ''
     let availabilityPoster = `${this._imgPath}${poster_path}`
@@ -60,7 +74,12 @@ export default class Card extends Component {
         <div className="card">
           <img className="poster" src={this.posterPath(poster_path, availabilityPoster)} alt="poster" />
           <div className="data-card">
-            <h2 className="title">{title}</h2>
+            <div className="title-reiting">
+              <h2 className="title">{title}</h2>
+              <div className="reiting" style={this.reitingColor(vote_average)}>
+                <span>{vote_average}</span>
+              </div>
+            </div>
             <div className="data-of-release">{this.releaseData(release_date)}</div>
             <ul className="category">
               <li>
@@ -70,7 +89,6 @@ export default class Card extends Component {
                 <button aria-label="category">драма</button>
               </li>
             </ul>
-
             <p className="intro" onClick={this.readMore}>
               {this.mainText(overview)}
               <span className={dots}>{this.hidenDots(overview)}</span>

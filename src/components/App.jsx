@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
+import { Offline, Online } from 'react-detect-offline'
+import { Alert, Space } from 'antd'
+import { debounce } from 'lodash'
 
 import serverRequest from '../services/ApiRequest.js'
 
 import SearchForm from './SearchForm/SearchForm'
 import Preloader from './Preloader/Preloader'
 const Movies = React.lazy(() => import('./Movies/Movies'))
-import Warning from './Warning/Warning'
+// import Warning from './Warning/Warning'
 import Pages from './Pages/Pages'
 import './App.css'
 
@@ -15,34 +18,51 @@ export default class App extends Component {
     value: '',
   }
 
-  async componentDidMount(movie) {
-    const data = await serverRequest(movie)
+  async componentDidMount(movie, event) {
+    const data = await serverRequest(movie, event)
     this.setState({
       request: data.results,
     })
   }
 
-  searchMovie = (movie) => {
+  searchMovie = debounce((movie) => {
     if (movie) {
       this.setState({
         value: movie,
       })
       this.componentDidMount(movie)
     }
+  }, 700)
+
+  currentPage = (event) => {
+    this.componentDidMount(event)
   }
 
   render() {
-    const { request, value } = this.state
-    console.log(request.length)
+    const { request } = this.state
 
     return (
-      <div className="movies-app">
-        <SearchForm searchMovie={this.searchMovie} />
-        <React.Suspense fallback={<Preloader />}>
-          {request.length ? <Movies request={request} /> : <Warning value={value} />}
-        </React.Suspense>
-        <Pages />
-      </div>
+      <>
+        <Online>
+          <div className="movies-app">
+            <SearchForm searchMovie={this.searchMovie} />
+            <React.Suspense fallback={<Preloader />}>
+              <Movies request={request} />
+            </React.Suspense>
+            <Pages currentPage={this.currentPage} />
+          </div>
+        </Online>
+        <Offline>
+          <Space
+            direction="vertical"
+            style={{
+              width: '100%',
+            }}
+          >
+            <Alert message="Внимание!" description="Отсутствует подключение к интернету." type="error" showIcon />
+          </Space>
+        </Offline>
+      </>
     )
   }
 }

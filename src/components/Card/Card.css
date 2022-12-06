@@ -41,10 +41,28 @@
   display: none;
 }
 
+.title-reiting {
+  display: flex;
+  justify-content: space-between;
+  min-width: 240px;
+}
+
 .title {
   margin: 0;
   padding: 0 20px 10px 20px;
   max-width: 240px;
+}
+
+.reiting {
+  border: 2px solid;
+  border-radius: 50%;
+  height: 30px;
+  min-width: 30px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
 }
 
 .data-of-release {
