@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { format } from 'date-fns'
 import { ru } from 'date-fns/locale'
 
+import Category from '../Category/Category'
+import Stars from '../Stars/Stars'
+
 import Image from './no-poster.webp'
 
 import './Card.css'
@@ -62,7 +65,7 @@ export default class Card extends Component {
   }
 
   render() {
-    const { poster_path, title, release_date, overview, vote_average } = this.props
+    const { id, poster_path, title, release_date, overview, vote_average, genre_ids } = this.props
     const { isVisibleText, isVisibleDots } = this.state
 
     let classEdit = !isVisibleText ? 'more-text' : ''
@@ -81,19 +84,15 @@ export default class Card extends Component {
               </div>
             </div>
             <div className="data-of-release">{this.releaseData(release_date)}</div>
-            <ul className="category">
-              <li>
-                <button aria-label="category">экшн</button>
-              </li>
-              <li>
-                <button aria-label="category">драма</button>
-              </li>
+            <ul className="category-list">
+              <Category genre_ids={genre_ids} key={id} />
             </ul>
             <p className="intro" onClick={this.readMore}>
               {this.mainText(overview)}
               <span className={dots}>{this.hidenDots(overview)}</span>
               <span className={classEdit}> {this.moreText(overview)}</span>
             </p>
+            <Stars />
           </div>
         </div>
       </section>

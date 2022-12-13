@@ -8,7 +8,6 @@ import './Movies.css'
 export default class Movies extends Component {
   render() {
     const { request } = this.props
-    console.log(request)
 
     if (request.length) {
       const films = request.map((film) => {

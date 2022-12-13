@@ -1,0 +1,9 @@
+.ant-rate {
+  font-size: 18px;
+  max-width: 240px;
+  padding: 10px 0 5px 20px;
+}
+
+.ant-rate-star {
+  margin-inline-end: 4px;
+}

@@ -4,24 +4,33 @@ import { Alert, Space } from 'antd'
 import { debounce } from 'lodash'
 
 import serverRequest from '../services/ApiRequest.js'
+import categoryRequest from '../services/categoryRequest.js'
+import guestSessionRequest from '../services/guestSession.js'
 
 import SearchForm from './SearchForm/SearchForm'
 import Preloader from './Preloader/Preloader'
 const Movies = React.lazy(() => import('./Movies/Movies'))
-// import Warning from './Warning/Warning'
 import Pages from './Pages/Pages'
 import './App.css'
+import { CategoryRequestProvider } from './categotyRequestContext/categotyRequestContext'
 
 export default class App extends Component {
   state = {
     request: [],
     value: '',
+    category: [],
   }
 
   async componentDidMount(movie, event) {
     const data = await serverRequest(movie, event)
+    const category = await categoryRequest()
+    const guestSession = await guestSessionRequest()
+
+    !localStorage.getItem('guest') && localStorage.setItem('guest', `${guestSession.guest_session_id}`)
+
     this.setState({
       request: data.results,
+      category: category.genres,
     })
   }
 
@@ -39,18 +48,20 @@ export default class App extends Component {
   }
 
   render() {
-    const { request } = this.state
+    const { request, category } = this.state
 
     return (
       <>
         <Online>
-          <div className="movies-app">
-            <SearchForm searchMovie={this.searchMovie} />
-            <React.Suspense fallback={<Preloader />}>
-              <Movies request={request} />
-            </React.Suspense>
-            <Pages currentPage={this.currentPage} />
-          </div>
+          <CategoryRequestProvider value={category}>
+            <div className="movies-app">
+              <SearchForm searchMovie={this.searchMovie} />
+              <React.Suspense fallback={<Preloader />}>
+                <Movies request={request} />
+              </React.Suspense>
+              <Pages currentPage={this.currentPage} />
+            </div>
+          </CategoryRequestProvider>
         </Online>
         <Offline>
           <Space
