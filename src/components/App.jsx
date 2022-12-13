@@ -5,7 +5,7 @@ import { debounce } from 'lodash'
 
 import serverRequest from '../services/ApiRequest.js'
 import categoryRequest from '../services/categoryRequest.js'
-import guestSessionRequest from '../services/guestSession.js'
+// import guestSessionRequest from '../services/guestSession.js'
 
 import SearchForm from './SearchForm/SearchForm'
 import Preloader from './Preloader/Preloader'
@@ -24,9 +24,9 @@ export default class App extends Component {
   async componentDidMount(movie, event) {
     const data = await serverRequest(movie, event)
     const category = await categoryRequest()
-    const guestSession = await guestSessionRequest()
+    // const guestSession = await guestSessionRequest()
 
-    !localStorage.getItem('guest') && localStorage.setItem('guest', `${guestSession.guest_session_id}`)
+    // !localStorage.getItem('guest') && localStorage.setItem('guest', `${guestSession.guest_session_id}`)
 
     this.setState({
       request: data.results,

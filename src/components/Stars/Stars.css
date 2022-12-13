@@ -4,6 +4,6 @@
   padding: 10px 0 5px 20px;
 }
 
-.ant-rate-star {
+:where(.css-dev-only-do-not-override-16qxzfl).ant-rate .ant-rate-star:not(:last-child) {
   margin-inline-end: 4px;
 }

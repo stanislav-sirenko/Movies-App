@@ -9,7 +9,6 @@ export default class SearchForm extends Component {
   onLabelChange = (event) => {
     const { searchMovie } = this.props
     const { value } = this.state
-    console.log(event)
     if (event.target.value.charAt(0) === ' ') {
       this.setState({
         value: '',

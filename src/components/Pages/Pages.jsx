@@ -8,6 +8,3 @@ export default class Pages extends Component {
     return <Pagination onChange={(event) => currentPage(event)} defaultCurrent={1} total={500} />
   }
 }
-
-// const App = () => <Pagination defaultCurrent={1} total={50} />
-// export default App

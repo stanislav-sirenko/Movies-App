@@ -92,7 +92,7 @@ export default class Card extends Component {
               <span className={dots}>{this.hidenDots(overview)}</span>
               <span className={classEdit}> {this.moreText(overview)}</span>
             </p>
-            <Stars />
+            <Stars id={id} />
           </div>
         </div>
       </section>

@@ -12,7 +12,7 @@ export default class Movies extends Component {
     if (request.length) {
       const films = request.map((film) => {
         const { id, ...allProps } = film
-        return <Card key={id} {...allProps} />
+        return <Card key={id} id={id} {...allProps} />
       })
 
       return <section className="card-condainer">{films}</section>
