@@ -6,30 +6,6 @@
   margin-bottom: 30px;
 }
 
-.search-button {
-  display: flex;
-  justify-content: center;
-  margin: 10px 0;
-  border-bottom: 1 px solid red;
-}
-
-.search-button > input {
-  padding: 10px 10px 10px 10px;
-  background-color: #fff;
-  border: none;
-  border-bottom: 1px solid #d9d9d9;
-  color: rgba(0, 0, 0, 0.65);
-  cursor: pointer;
-  transition-duration: 0.7s;
-}
-
-.search-button > input:hover {
-  padding: 10px 10px 8px 10px;
-  color: #1890ff;
-  border-bottom: 3px solid #1890ff;
-  transition-duration: 0.7s;
-}
-
 .search-label {
   display: flex;
   justify-content: center;

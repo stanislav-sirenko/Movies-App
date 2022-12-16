@@ -25,10 +25,6 @@ export default class SearchForm extends Component {
     const { value } = this.state
     return (
       <form className="search-form">
-        <div className="search-button">
-          <input type="submit" value="Поиск" />
-          <input type="submit" value="Рейтинг" />
-        </div>
         <label className="search-label">
           <input
             type="text"

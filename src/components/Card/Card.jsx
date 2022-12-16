@@ -65,7 +65,7 @@ export default class Card extends Component {
   }
 
   render() {
-    const { id, poster_path, title, release_date, overview, vote_average, genre_ids } = this.props
+    const { id, poster_path, title, release_date, overview, vote_average, genre_ids, rating } = this.props
     const { isVisibleText, isVisibleDots } = this.state
 
     let classEdit = !isVisibleText ? 'more-text' : ''
@@ -80,7 +80,7 @@ export default class Card extends Component {
             <div className="title-reiting">
               <h2 className="title">{title}</h2>
               <div className="reiting" style={this.reitingColor(vote_average)}>
-                <span>{vote_average}</span>
+                <span>{Math.round(vote_average)}</span>
               </div>
             </div>
             <div className="data-of-release">{this.releaseData(release_date)}</div>
@@ -92,7 +92,7 @@ export default class Card extends Component {
               <span className={dots}>{this.hidenDots(overview)}</span>
               <span className={classEdit}> {this.moreText(overview)}</span>
             </p>
-            <Stars id={id} />
+            <Stars id={id} rating={rating} />
           </div>
         </div>
       </section>

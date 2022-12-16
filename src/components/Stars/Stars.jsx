@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Rate } from 'antd'
 import './Stars.css'
 
-import guestSessionRequest from '../../services/guestSession.js'
+import { postRequest } from '../../services/guestSession.js'
 
 export default class Stars extends Component {
   state = {
@@ -18,8 +18,25 @@ export default class Stars extends Component {
   componentDidUpdate() {
     const { id } = this.props
     const { starValue } = this.state
-    guestSessionRequest(id, starValue)
+    if (id && starValue) {
+      postRequest(id, starValue)
+    }
   }
+
+  componentDidMount() {
+    const { id, rating } = this.props
+
+    if (rating) {
+      this.setState({
+        starValue: rating,
+      })
+    } else {
+      this.setState({
+        starValue: Number(localStorage.getItem(`${id}`)),
+      })
+    }
+  }
+
   render() {
     const { starValue } = this.state
     return <Rate allowHalf count={10} onChange={this.onStarsChange} value={starValue} />

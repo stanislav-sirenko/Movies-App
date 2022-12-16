@@ -12,3 +12,7 @@
   color: rgba(0, 0, 0, 0.65);
   cursor: default;
 }
+
+:where(.css-dev-only-do-not-override-3oxuke).ant-tabs {
+  line-height: 1;
+}
