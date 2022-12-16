@@ -1,5 +1,4 @@
 const serverRequest = (movie, page) => {
-  console.log(movie)
   const _defaultPath = 'https://api.themoviedb.org/3/search/movie'
   const _apiKey = '5cde17194d6b87ef840a2815c61af67e'
   const _language = 'ru-RU'
@@ -13,10 +12,4 @@ const serverRequest = (movie, page) => {
   }
 }
 
-// const currentPage = (page) => {
-//   // console.log(page)
-//   return page
-// }
-
 export default serverRequest
-// &page=${page}
