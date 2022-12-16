@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Offline, Online } from 'react-detect-offline'
 import { Tabs, Alert, Space, Pagination } from 'antd'
 
-import serverRequest from '../services/apiRequest'
+import serverRequest from '../services/ApiRequest'
 import genresRequest from '../services/genresRequest.js'
 import { guestSessionRequest, getRequest } from '../services/guestSession.js'
 
