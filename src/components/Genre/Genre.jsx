@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 
-import './Category.css'
-import { CategoryRequestConsumer } from '../categotyRequestContext/categotyRequestContext'
+import './Genre.css'
+import { Consumer } from '../genresContext/genresContext'
 
-export default class Category extends Component {
+export default class Genre extends Component {
   render() {
     const { genre_ids } = this.props
     return (
-      <CategoryRequestConsumer>
+      <Consumer>
         {(category) => {
           if (category.length) {
             let res = genre_ids.map((item) => {
@@ -24,7 +24,7 @@ export default class Category extends Component {
             return resGenre
           }
         }}
-      </CategoryRequestConsumer>
+      </Consumer>
     )
   }
 }

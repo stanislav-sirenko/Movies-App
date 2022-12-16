@@ -1,70 +1,73 @@
 import React, { Component } from 'react'
 import { Offline, Online } from 'react-detect-offline'
-import { Tabs, Alert, Space } from 'antd'
-import { debounce } from 'lodash'
+import { Tabs, Alert, Space, Pagination } from 'antd'
 
-import serverRequest from '../services/ApiRequest.js'
-import categoryRequest from '../services/categoryRequest.js'
+import serverRequest from '../services/apiRequest.js'
+import genresRequest from '../services/genresRequest.js'
 import { guestSessionRequest, getRequest } from '../services/guestSession.js'
 
 import SearchForm from './SearchForm/SearchForm'
 import Preloader from './Preloader/Preloader'
 const Movies = React.lazy(() => import('./Movies/Movies'))
-import Pages from './Pages/Pages'
 import './App.css'
-import { CategoryRequestProvider } from './categotyRequestContext/categotyRequestContext'
+import { Provider } from './genresContext/genresContext'
 
 export default class App extends Component {
   state = {
-    request: [],
-    ratedFilms: [],
+    movies: [],
+    ratedMovies: [],
+    genresMovies: [],
     value: '',
-    category: [],
+    totalPage: null,
+    currentPage: 1,
   }
 
-  async componentDidMount(movie, event) {
-    const data = await serverRequest(movie, event)
-    // console.log(data.results.length)
-    const category = await categoryRequest()
-    const guestSession = await guestSessionRequest()
-    localStorage.clear()
-    !localStorage.getItem('guest') && localStorage.setItem('guest', `${guestSession.guest_session_id}`)
-
-    this.setState({
-      request: data.results,
-      category: category.genres,
+  componentDidMount() {
+    genresRequest().then((genresMovies) => this.setState({ genresMovies: genresMovies.genres }))
+    guestSessionRequest().then((guestSession) => {
+      !localStorage.getItem('guest') && localStorage.setItem('guest', `${guestSession.guest_session_id}`)
     })
   }
 
-  onChange = async () => {
-    const dataRate = await getRequest()
-    this.setState({
-      ratedFilms: dataRate.results,
-    })
-  }
-
-  searchMovie = debounce((movie) => {
-    if (movie) {
+  onChangeTabs = () => {
+    getRequest().then((dataRate) => {
       this.setState({
-        value: movie,
+        ratedMovies: dataRate.results,
       })
-      this.componentDidMount(movie)
-    }
-  }, 100)
+    })
+  }
 
-  currentPage = (event) => {
-    this.componentDidMount(event)
+  searchMovie = (inputText) => {
+    if (inputText) {
+      serverRequest(inputText).then((data) => {
+        this.setState({
+          value: inputText,
+          movies: data.results,
+          totalPage: data.total_pages,
+          currentPage: data.page,
+        })
+      })
+    }
+  }
+
+  nextPage = (valuePagination) => {
+    serverRequest(this.state.value, valuePagination).then((data) => {
+      this.setState({
+        movies: data.results,
+        totalPage: data.total_pages,
+        currentPage: data.page,
+      })
+    })
   }
 
   render() {
-    const { request, ratedFilms, category } = this.state
-    console.log(request.length)
+    const { movies, ratedMovies, genresMovies, currentPage, totalPage } = this.state
 
     return (
       <Tabs
         centered
         defaultActiveKey="1"
-        onChange={this.onChange}
+        onChange={this.onChangeTabs}
         items={[
           {
             label: 'Поиск',
@@ -72,15 +75,22 @@ export default class App extends Component {
             children: (
               <>
                 <Online>
-                  <CategoryRequestProvider value={category}>
+                  <Provider value={genresMovies}>
                     <div className="movies-app">
                       <SearchForm searchMovie={this.searchMovie} />
                       <React.Suspense fallback={<Preloader />}>
-                        <Movies request={request} />
+                        <Movies movies={movies} />
                       </React.Suspense>
-                      <Pages currentPage={this.currentPage} />
+                      <Pagination
+                        current={currentPage}
+                        onChange={this.nextPage}
+                        total={totalPage * 20}
+                        hideOnSinglePage={true}
+                        pageSize={20}
+                        showSizeChanger={false}
+                      />
                     </div>
-                  </CategoryRequestProvider>
+                  </Provider>
                 </Online>
                 <Offline>
                   <Space
@@ -104,13 +114,13 @@ export default class App extends Component {
             label: 'Рейтинг',
             key: '2',
             children: (
-              <CategoryRequestProvider value={category}>
+              <Provider value={genresMovies}>
                 <div className="movies-app">
                   <React.Suspense fallback={<Preloader />}>
-                    <Movies request={ratedFilms} />
+                    <Movies movies={ratedMovies} />
                   </React.Suspense>
                 </div>
-              </CategoryRequestProvider>
+              </Provider>
             ),
           },
         ]}

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { format } from 'date-fns'
 import { ru } from 'date-fns/locale'
 
-import Category from '../Category/Category'
+import Genre from '../Genre/Genre'
 import Stars from '../Stars/Stars'
 
 import Image from './no-poster.webp'
@@ -17,18 +17,14 @@ export default class Card extends Component {
     isVisibleDots: true,
   }
 
-  mainText(text) {
-    return text.split(' ').slice(0, 54).join(' ')
-  }
+  mainText = (text) => text.split(' ').slice(0, 54).join(' ')
 
-  moreText(text) {
+  moreText = (text) => {
     let words = text.split(' ')
-    if (words.length > 55) {
-      return words.slice(54, words.length).join(' ')
-    }
+    if (words.length > 55) return words.slice(54, words.length).join(' ')
   }
 
-  hidenDots(text) {
+  hidenDots = (text) => {
     let word = text.split(' ')
     return word.length > 55 ? '...' : ' '
   }
@@ -39,16 +35,13 @@ export default class Card extends Component {
     })
   }
 
-  posterPath = (poster_path, availabilityPoster) => {
-    return poster_path === null ? Image : availabilityPoster
-  }
+  posterPath = (poster_path, availabilityPoster) => (poster_path === null ? Image : availabilityPoster)
 
   releaseData = (release_date) => {
     if (release_date) {
       return format(new Date(release_date), 'PP', { locale: ru })
-    } else {
-      return 'Release date unknown'
     }
+    return 'Дата релиза неизвестна'
   }
 
   reitingColor = (vote_average) => {
@@ -85,7 +78,7 @@ export default class Card extends Component {
             </div>
             <div className="data-of-release">{this.releaseData(release_date)}</div>
             <ul className="category-list">
-              <Category genre_ids={genre_ids} key={id} />
+              <Genre genre_ids={genre_ids} key={id} />
             </ul>
             <p className="intro" onClick={this.readMore}>
               {this.mainText(overview)}

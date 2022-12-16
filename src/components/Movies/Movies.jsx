@@ -7,9 +7,9 @@ import './Movies.css'
 
 export default class Movies extends Component {
   render() {
-    const { request } = this.props
-    if (request.length) {
-      const films = request.map((film) => {
+    const { movies } = this.props
+    if (movies.length) {
+      const films = movies.map((film) => {
         const { id, ...allProps } = film
         return <Card key={id} id={id} {...allProps} />
       })

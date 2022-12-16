@@ -1,4 +1,4 @@
-async function categoryRequest() {
+async function genresRequest() {
   const _defaultPath = 'https://api.themoviedb.org/3/genre/movie/list'
   const _apiKey = '5cde17194d6b87ef840a2815c61af67e'
   const _language = 'ru-RU'
@@ -13,4 +13,4 @@ async function categoryRequest() {
   }
 }
 
-export default categoryRequest
+export default genresRequest

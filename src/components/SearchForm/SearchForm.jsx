@@ -1,28 +1,20 @@
 import React, { Component } from 'react'
+import { debounce } from 'lodash'
 
 import './SearchForm.css'
 export default class SearchForm extends Component {
-  state = {
-    value: '',
+  onLabelChange = (event) => {
+    if (event.target.value.charAt(0) === ' ') {
+      return ''
+    }
+    this.debouncedSearch(event.target.value)
   }
 
-  onLabelChange = (event) => {
-    const { searchMovie } = this.props
-    const { value } = this.state
-    if (event.target.value.charAt(0) === ' ') {
-      this.setState({
-        value: '',
-      })
-    } else {
-      this.setState({
-        value: event.target.value,
-      })
-      searchMovie(value)
-    }
-  }
+  debouncedSearch = debounce((value) => {
+    this.props.searchMovie(value)
+  }, 100)
 
   render() {
-    const { value } = this.state
     return (
       <form className="search-form">
         <label className="search-label">
@@ -31,7 +23,6 @@ export default class SearchForm extends Component {
             className="search-input"
             placeholder="Введите текст для поиска..."
             onChange={this.onLabelChange}
-            value={value}
             autoFocus
           />
         </label>
