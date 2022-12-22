@@ -2,15 +2,15 @@ import React, { Component } from 'react'
 import { Offline, Online } from 'react-detect-offline'
 import { Tabs, Alert, Space, Pagination } from 'antd'
 
-import serverRequest from '../services/ApiRequest'
-import genresRequest from '../services/genresRequest.js'
-import { guestSessionRequest, getRequest } from '../services/guestSession.js'
+import serverRequest from '../services/api-request'
+import genresRequest from '../services/genres-request.js'
+import { guestSessionRequest, getRequest } from '../services/guest-session.js'
 
-import SearchForm from './SearchForm/SearchForm'
-import Preloader from './Preloader/Preloader'
-const Movies = React.lazy(() => import('./Movies/Movies'))
-import './App.css'
-import { Provider } from './genresContext/genresContext'
+import SearchForm from './search-form/search-form'
+import Preloader from './preloader/preloader'
+const Movies = React.lazy(() => import('./movies/movies'))
+import './app.css'
+import { Provider } from './context'
 
 export default class App extends Component {
   state = {

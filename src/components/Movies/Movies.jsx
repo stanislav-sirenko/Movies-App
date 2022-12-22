@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 
-import Warning from '../Warning/Warning'
-import Card from '../Card/Card'
+import Warning from '../warning/warning'
+import Card from '../card/card'
 
-import './Movies.css'
+import './movies.css'
 
 export default class Movies extends Component {
   render() {

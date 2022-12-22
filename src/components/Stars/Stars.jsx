@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Rate } from 'antd'
-import './Stars.css'
+import './stars.css'
 
-import { postRequest } from '../../services/guestSession.js'
+import { postRequest } from '../../services/guest-session.js'
 
 export default class Stars extends Component {
   state = {
