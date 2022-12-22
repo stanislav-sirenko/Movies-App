@@ -1,0 +1,112 @@
+.card-condainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  width: 450px;
+  overflow: hidden;
+  padding: 1em;
+  display: flex;
+  font-family: 'Doloman';
+  margin: 1em;
+  transition-duration: 0.7s;
+  border: 1px solid rgb(212, 212, 212);
+  border-radius: 10px;
+  box-shadow: 3px 3px 10px #8f8f8f, -3px -3px 10px #ebebeb;
+}
+
+.card:hover {
+  box-shadow: 10px 10px 30px #8f8f8f, 10px 10px 30px #ebebeb;
+  transition-duration: 0.4s;
+  scale: 1.05;
+}
+
+.data-card {
+  box-sizing: border-box;
+}
+
+.poster {
+  box-sizing: border-box;
+  max-width: 200px;
+  max-height: 300px;
+}
+
+.intro {
+  cursor: pointer;
+}
+
+.dots {
+  display: none;
+}
+
+.title-reiting {
+  display: flex;
+  justify-content: space-between;
+  min-width: 240px;
+}
+
+.title {
+  margin: 0;
+  padding: 0 20px 10px 20px;
+  max-width: 240px;
+}
+
+.reiting {
+  border: 2px solid;
+  border-radius: 50%;
+  height: 30px;
+  min-width: 30px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+}
+
+.data-of-release {
+  padding: 0 20px 0 20px;
+  color: #827e7e;
+}
+
+.category-list {
+  margin: 0;
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.intro {
+  max-width: 240px;
+  padding-left: 20px;
+  margin: 10px 0 0;
+  line-height: 15px;
+}
+
+.more-text {
+  display: none;
+}
+
+@media (max-width: 739px) {
+  .card {
+    width: auto;
+  }
+
+  .title {
+    padding-top: 10px;
+  }
+}
+
+@media (max-width: 500px) {
+  .card {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card:hover {
+    scale: 1;
+  }
+}

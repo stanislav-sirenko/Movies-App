@@ -1,0 +1,9 @@
+.ant-rate {
+  font-size: 15px;
+  max-width: 250px;
+  padding: 10px 0 5px 20px;
+}
+
+:where(.css-dev-only-do-not-override-16qxzfl).ant-rate .ant-rate-star:not(:last-child) {
+  margin-inline-end: 4px;
+}
