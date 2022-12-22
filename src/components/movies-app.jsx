@@ -9,7 +9,7 @@ import { guestSessionRequest, getRequest } from '../services/guest-session.js'
 import SearchForm from './search-form/search-form'
 import Preloader from './preloader/preloader'
 const Movies = React.lazy(() => import('./movies/movies'))
-import './app.css'
+import './movies-app.css'
 import { Provider } from './context'
 
 export default class App extends Component {
