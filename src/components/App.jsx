@@ -6,10 +6,10 @@ import serverRequest from '../services/api-request'
 import genresRequest from '../services/genres-request.js'
 import { guestSessionRequest, getRequest } from '../services/guest-session.js'
 
-import SearchForm from './search-form/search-form'
-import Preloader from './preloader/preloader'
-const Movies = React.lazy(() => import('./movies/movies'))
-import './movies-app.css'
+import SearchForm from './SearchForm/SearchForm'
+import Preloader from './Preloader/Preloader'
+const Movies = React.lazy(() => import('./Movies/Movies'))
+import './App.css'
 import { Provider } from './context'
 
 export default class App extends Component {

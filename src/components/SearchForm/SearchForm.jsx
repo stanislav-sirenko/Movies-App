@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { debounce } from 'lodash'
 
-import './search-form.css'
+import './SearchForm.css'
 export default class SearchForm extends Component {
   onLabelChange = (event) => {
     if (event.target.value.charAt(0) === ' ') {

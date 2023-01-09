@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
-import './genre.css'
 import { Consumer } from '../context'
+import './Genre.css'
 
 export default class Genre extends Component {
   render() {

@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import { format } from 'date-fns'
 import { ru } from 'date-fns/locale'
 
-import Genre from '../genre/genre'
-import Stars from '../stars/stars'
+import Genre from '../Genre/Genre'
+import Stars from '../Stars/Stars'
 
 import Image from './no-poster.webp'
 
-import './card.css'
+import './Card.css'
 
 export default class Card extends Component {
   _imgPath = 'https://image.tmdb.org/t/p/w500'

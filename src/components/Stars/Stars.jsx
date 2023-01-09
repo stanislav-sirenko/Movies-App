@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Rate } from 'antd'
-import './stars.css'
+import './Stars.css'
 
 import { postRequest } from '../../services/guest-session.js'
 
